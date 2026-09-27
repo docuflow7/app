@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- base ---------- */
+html, body { height: 100%; }
+body { @apply bg-white text-zinc-900 antialiased; }
+.dark body { @apply bg-zinc-950 text-zinc-100; }
+
+::selection { @apply bg-indigo-200 text-indigo-950; }
+
+/* thin scrollbars */
+* { scrollbar-width: thin; scrollbar-color: theme('colors.zinc.400') transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { @apply bg-zinc-300 rounded-full; }
+.dark *::-webkit-scrollbar-thumb { @apply bg-zinc-700; }
+
+/* ---------- paper ---------- */
+.paper-wrap {
+  transition: all 150ms ease;
+}
+.paper {
+  background: #fff;
+  color: #18181b;
+  box-shadow: 0 20px 50px -12px rgb(0 0 0 / 0.25), 0 0 0 1px rgb(0 0 0 / 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.margin-guide {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+.margin-guide::before {
+  content: "";
+  position: absolute;
+  inset: var(--guide-inset, 1in);
+  border: 1.5px dashed rgb(99 102 241 / 0.55);
+  border-radius: 2px;
+  background: rgb(99 102 241 / 0.04);
+}
+
+/* ---------- document typography (screen + print share this) ---------- */
+.doc {
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.65;
+}
+.doc h1, .doc h2, .doc h3, .doc h4 {
+  line-height: 1.25;
+  font-weight: 700;
+  margin: 1.1em 0 0.45em;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+.doc h1 { font-size: 1.75em; letter-spacing: -0.01em; border-bottom: 2px solid currentColor; padding-bottom: 0.25em; }
+.doc h2 { font-size: 1.4em; }
+.doc h3 { font-size: 1.15em; }
+.doc p { margin: 0.6em 0; orphans: 3; widows: 3; }
+.doc ul, .doc ol { margin: 0.6em 0; padding-left: 1.5em; }
+.doc li { margin: 0.25em 0; orphans: 3; widows: 3; }
+.doc blockquote {
+  border-left: 3px solid #6366f1;
+  padding: 0.35em 0.9em;
+  margin: 0.9em 0;
+  background: rgb(99 102 241 / 0.06);
+  border-radius: 0 6px 6px 0;
+  break-inside: avoid;
+}
+.doc code {
+  font-family: var(--font-roboto-mono, ui-monospace, monospace);
+  font-size: 0.88em;
+  background: rgb(0 0 0 / 0.06);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+.doc pre {
+  background: #18181b;
+  color: #e4e4e7;
+  padding: 0.9em 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0.9em 0;
+  break-inside: avoid;
+}
+.doc pre code { background: transparent; padding: 0; color: inherit; }
+.doc table { width: 100%; border-collapse: collapse; margin: 0.9em 0; font-size: 0.95em; break-inside: avoid; }
+.doc th, .doc td { border: 1px solid #d4d4d8; padding: 0.45em 0.65em; text-align: left; }
+.doc th { background: rgb(0 0 0 / 0.04); font-weight: 700; }
+.doc hr { border: none; border-top: 1px solid #d4d4d8; margin: 1.2em 0; }
+.doc a { color: #4f46e5; text-decoration: underline; }
+.doc img { max-width: 100%; border-radius: 6px; }
+
+/* themes */
+.theme-modern { font-family: var(--font-inter, ui-sans-serif, system-ui, sans-serif); }
+.theme-modern .doc h1 { border-color: #6366f1; }
+.theme-classic { font-family: var(--font-merriweather, Georgia, serif); }
+.theme-classic .doc h1 { border-color: #18181b; }
+.theme-classic .doc blockquote { border-color: #a16207; background: rgb(161 98 7 / 0.07); }
+.theme-technical { font-family: var(--font-roboto-mono, ui-monospace, monospace); }
+.theme-technical .doc { font-size: 0.96em; }
+.theme-technical .doc h1 { border-color: #059669; }
+.theme-executive { font-family: var(--font-inter, ui-sans-serif, system-ui, sans-serif); background: #0f172a !important; color: #e2e8f0 !important; }
+.theme-executive .doc h1 { border-color: #f59e0b; }
+.theme-executive .doc a { color: #fbbf24; }
+.theme-executive .doc blockquote { background: rgb(245 158 11 / 0.1); border-color: #f59e0b; }
+.theme-executive .doc th { background: rgb(255 255 255 / 0.08); }
+.theme-executive .doc th, .theme-executive .doc td { border-color: rgb(255 255 255 / 0.2); }
+.theme-executive .doc code { background: rgb(255 255 255 / 0.12); }
+
+/* plain-text fallback preserves whitespace */
+.doc-plain { white-space: pre-wrap; font-size: inherit; }
+
+/* animations */
+@keyframes toast-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.toast-in { animation: toast-in 180ms ease; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.fade-in { animation: fade-in 150ms ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- print: ONLY the paper prints (editor/toolbars/settings hidden) ---------- */
+@media print {
+  .no-print { display: none !important; }
+  html, body { height: auto !important; background: #fff !important; }
+  /* Collapse the app flex shell so nothing clips the document to one viewport page */
+  .app-shell { display: block !important; height: auto !important; }
+  .app-main { display: block !important; height: auto !important; }
+  .preview-col { display: block !important; }
+  .print-canvas {
+    background: #fff !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+  .paper-wrap {
+    transform: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+  .paper {
+    box-shadow: none !important;
+    margin: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    border-radius: 0 !important;
+    /* Screen padding becomes the @page margin in print — no double margins,
+       no fixed heights, no clipping across page breaks. */
+    padding: 0 !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .margin-guide { display: none !important; }
+  .doc a { color: inherit; text-decoration: none; }
+}
