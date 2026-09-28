@@ -1,0 +1,7 @@
+# Netlify: serves the static `out/` bundle. Enables future git-push auto-deploys.
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "20"
