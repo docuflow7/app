@@ -1,5 +1,7 @@
 # DocuFlow — Text to PDF Studio
 
+> Turn raw text and Markdown into professional, vector-quality PDFs instantly — 100% client-side, no sign-up, free forever.
+
 Paste raw text or Markdown, style it with professional themes, and export a
 **selectable, searchable vector PDF**. 100% client-side: your text never leaves
 the browser. Drafts autosave to `localStorage`.

@@ -43,7 +43,7 @@ export function TopBar() {
         </span>
         <div className="leading-tight">
           <p className="text-sm font-bold tracking-tight">DocuFlow</p>
-          <p className="hidden text-[11px] text-zinc-500 sm:block">Text → PDF Studio</p>
+          <p className="hidden text-[11px] text-zinc-500 sm:block">Instant text → PDF · free forever</p>
         </div>
       </div>
 

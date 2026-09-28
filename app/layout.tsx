@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s — DocuFlow",
   },
   description:
-    "Convert raw text and Markdown into professional, vector-quality PDFs. Live preview, executive themes, page setup, watermarks. 100% client-side — your text never leaves the browser.",
+    "Turn raw text and Markdown into professional, vector-quality PDFs instantly — 100% client-side, no sign-up, free forever.",
   keywords: ["text to pdf", "markdown to pdf", "pdf converter", "document studio", "print to pdf", "client-side pdf"],
   authors: [{ name: "DocuFlow" }],
   creator: "DocuFlow",
