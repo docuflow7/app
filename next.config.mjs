@@ -6,6 +6,10 @@ const nextConfig = {
   output: "export",
   reactStrictMode: true,
   poweredByHeader: false,
+  // ESLint runs separately via `npm run lint`. Skipped here because the
+  // eslint-config-next plugin tree resolves unreliably on CI runners
+  // (local dev + `next lint` still enforce it). Type checking stays on.
+  eslint: { ignoreDuringBuilds: true },
   // GitHub project pages serve the site under a subpath (/app).
   // Set PAGES_BASE_PATH=/app only for that deploy; all other hosts use root.
   basePath: process.env.PAGES_BASE_PATH || "",
