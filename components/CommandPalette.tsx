@@ -5,6 +5,7 @@ import { Printer, Download, Sun, Moon, Type, PanelRight } from "lucide-react";
 import { useDocStore } from "@/lib/store";
 import { PRESETS } from "@/lib/presets";
 import { downloadMarkdown, exportPdfFlow } from "@/lib/markdown";
+import { exportPdfDownload } from "@/lib/exportPdf";
 
 export function CommandPalette() {
   const open = useDocStore((s) => s.paletteOpen);
@@ -35,7 +36,8 @@ export function CommandPalette() {
 
   const actions = useMemo(() => {
     const list = [
-      { id: "export", label: "Export PDF (print dialog)", icon: <Printer size={15} />, run: () => exportPdfFlow(setExportStage, pushToast, !!content.trim()) },
+      { id: "export", label: "Export PDF (instant download)", icon: <Download size={15} />, run: () => exportPdfDownload(setExportStage, pushToast) },
+      { id: "print", label: "Print exact layout (dialog)", icon: <Printer size={15} />, run: () => exportPdfFlow(setExportStage, pushToast, !!content.trim()) },
       { id: "md", label: "Download Markdown", icon: <Download size={15} />, run: () => downloadMarkdown(content, filename) },
       { id: "dark", label: "Toggle dark canvas", icon: <Moon size={15} />, run: () => toggle("darkMode") },
       { id: "focus", label: "Toggle focus mode", icon: <Type size={15} />, run: () => toggle("focusMode") },

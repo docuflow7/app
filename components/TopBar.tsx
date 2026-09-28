@@ -15,6 +15,7 @@ import {
 import { useDocStore } from "@/lib/store";
 import { PRESETS } from "@/lib/presets";
 import { downloadMarkdown, exportPdfFlow } from "@/lib/markdown";
+import { exportPdfDownload } from "@/lib/exportPdf";
 import { Button } from "./Ui";
 
 export function TopBar() {
@@ -148,21 +149,31 @@ export function TopBar() {
         <span className="hidden xl:inline">.md</span>
       </Button>
       <Button
+        variant="ghost"
+        size="icon"
+        ariaLabel="Print exact preview layout (browser print dialog)"
+        title="Print exact layout"
+        onClick={() => exportPdfFlow(setExportStage, pushToast, !!content.trim())}
+      >
+        <Printer size={17} />
+      </Button>
+      <Button
         variant="primary"
         size="sm"
         disabled={busy}
-        ariaLabel="Export PDF via print dialog"
-        onClick={() => exportPdfFlow(setExportStage, pushToast, !!content.trim())}
+        ariaLabel="Download PDF file instantly"
+        title="Download vector PDF instantly"
+        onClick={() => exportPdfDownload(setExportStage, pushToast)}
         className="min-w-[118px]"
       >
         {busy ? (
           <>
             <Loader2 size={15} className="animate-spin" />
-            {exportStage === "compiling" ? "Compiling…" : exportStage === "rendering" ? "Rendering…" : "Ready"}
+            {exportStage === "compiling" ? "Compiling…" : exportStage === "rendering" ? "Rendering…" : "Saving…"}
           </>
         ) : (
           <>
-            <Printer size={15} />
+            <Download size={15} />
             Export PDF
           </>
         )}

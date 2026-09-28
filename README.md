@@ -29,7 +29,9 @@ NEXT_PUBLIC_SITE_URL=https://your-domain.com npm run build
 - Live Markdown preview (GFM: tables, checklists, code) with 300ms-debounced paint
 - Page setup: A4 / Letter / Legal, portrait / landscape, 4 margin presets + custom
 - 4 typography themes, custom header/footer, `Page X of Y`, watermark
-- Export PDF via the browser print pipeline (true vector text, correct file name)
+- Export PDF **downloads instantly** as a selectable, searchable vector file
+  (rendered client-side with @react-pdf/renderer + remark; no print dialog)
+- Printer button for exact browser-layout printing (preview is the print source)
 - Download `.md` source, import `.md` / `.txt` via button or drag-drop
 - Command palette (`Ctrl+K`), focus mode, dark canvas, zoom, margin guides
 - Presets: Executive Report, Academic Essay, Minimalist Letter, Invoice

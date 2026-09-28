@@ -164,7 +164,7 @@ export function PageSettings() {
       </div>
 
       <p className="rounded-md bg-zinc-50 p-2 text-[11px] leading-relaxed text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400">
-        Preview is the print source — what you see is what the vector PDF contains. Use Export PDF and choose “Save as PDF”.
+        Export PDF downloads a selectable vector file instantly. Use the printer icon for an exact browser-layout print instead.
       </p>
     </aside>
   );
